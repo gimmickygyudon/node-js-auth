@@ -3,11 +3,18 @@ import cors from "cors";
 
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//     origin: "http://localhost:8081"
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(
+    cors({
+      credentials: true,
+      allowedHeaders: "*",
+      allowedOrigins: "*",
+    })
+  );
 
 // parse requests of content-type - application/json
 app.use(express.json());

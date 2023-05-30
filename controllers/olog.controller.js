@@ -6,7 +6,7 @@ const Op = Olog.Sequelize.Op;
 // Create and Save a new Tutorial
 export const create = async (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.id_olog) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -23,9 +23,10 @@ export const create = async (req, res) => {
     };
 
     // Save Tutorial in the database
-    Olog.create(olog)
+    
+    Model.create(req.body)
         .then(data => {
-            res.send(data);
+            res.status(201).send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -37,8 +38,8 @@ export const create = async (req, res) => {
 
 // Retrieve all Tutorials from the database.
 export const findAll = async (req, res) => {
-    const id_olog = req.query.id_olog;
-    var condition = id_olog ? { id_olog: { [Op.like]: `%${id_olog}%` } } : null;
+    const source = req.query.source;
+    var condition = source ? { source: { [Op.like]: `%${source}%` } } : null;
 
     Model.findAll({ where: condition })
         .then(data => {
@@ -54,21 +55,21 @@ export const findAll = async (req, res) => {
 
 // Find a single Tutorial with an id
 export const findOne = async (req, res) => {
-    const id_olog = req.params.id_olog;
+    const source = req.params.id_olog;
 
     Model.findByPk(id_olog)
         .then(data => {
             if (data) {
-                res.send(data);
+                res.status(200).send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find Tutorial with id_olog=${id_olog}.`
+                    message: `Cannot find olog with id_olog=${id_olog}.`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Tutorial with id_olog=" + id_olog
+                message: "Error retrieving olog with id_olog=" + id_olog
             });
         });
 }
