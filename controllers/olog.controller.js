@@ -3,10 +3,19 @@ import Olog from "../config/db.config.js";
 import Model from "../models/olog.model.js";
 const Op = Olog.Sequelize.Op;
 
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // Create and Save a new Tutorial
 export const create = async (req, res) => {
     // Validate request
-    if (!req.body.id_olog) {
+    if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -43,7 +52,13 @@ export const findAll = async (req, res) => {
 
     Model.findAll({ where: condition })
         .then(data => {
-            res.send(data);
+            if (!isEmptyObject(data)) {
+                res.status(200).send(data);
+            } else {
+                res.status(404).send({
+                    message: `Cannot find olog with source=${source}.`
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
@@ -59,7 +74,7 @@ export const findOne = async (req, res) => {
 
     Model.findByPk(id_olog)
         .then(data => {
-            if (data) {
+            if (!isEmptyObject(data)) {
                 res.status(200).send(data);
             } else {
                 res.status(404).send({
@@ -99,29 +114,29 @@ export function update(req, res) {
         });
 }
 
-// Delete a Tutorial with the specified id in the request
-const _delete = (req, res) => {
-    const id_olog = req.params.id_olog;
+//  // Delete a Tutorial with the specified id in the request
+//  const _delete = (req, res) => {
+//      const id_olog = req.params.id_olog;
 
-    Tutorial.destroy({
-        where: { id_olog: id_olog }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Tutorial was deleted successfully!"
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete Tutorial with id_olog=${id_olog}. Maybe Tutorial was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete Tutorial with id_olog=" + id_olog
-            });
-        });
-};
+//      Tutorial.destroy({
+//          where: { id_olog: id_olog }
+//      })
+//          .then(num => {
+//              if (num == 1) {
+//                  res.send({
+//                      message: "Tutorial was deleted successfully!"
+//                  });
+//              } else {
+//                  res.send({
+//                      message: `Cannot delete Tutorial with id_olog=${id_olog}. Maybe Tutorial was not found!`
+//                  });
+//              }
+//          })
+//          .catch(err => {
+//              res.status(500).send({
+//                  message: "Could not delete Tutorial with id_olog=" + id_olog
+//              });
+//          });
+//  };
 
-export { _delete as delete };
+//  export { _delete as delete };
