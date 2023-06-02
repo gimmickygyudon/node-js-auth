@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 // set port, listen for requests
 // require("./routes/olog.routes.js").default(app);
-import Router from "./routes/olog.routes.js";
+import Router from "./routes/routes.js";
 app.use(Router)
 
 const PORT = process.env.PORT || 8080;

@@ -1,7 +1,7 @@
 // import db from "../models/index.js";
-import Olog from "../config/db.config.js";
+import db from "../config/db.config.js";
 import Model from "../models/olog.model.js";
-const Op = Olog.Sequelize.Op;
+const Op = db.Sequelize.Op;
 
 function isEmptyObject(obj) {
     for (var key in obj) {
@@ -12,7 +12,6 @@ function isEmptyObject(obj) {
     return true;
 }
 
-// Create and Save a new Tutorial
 export const create = async (req, res) => {
     // Validate request
     if (!req.body) {
@@ -93,7 +92,7 @@ export const findOne = async (req, res) => {
 export function update(req, res) {
     const id_olog = req.params.id_olog;
 
-    Olog.update(req.body, {
+    db.update(req.body, {
         where: { id_olog: id_olog }
     })
         .then(num => {
