@@ -36,14 +36,27 @@ export const OUSR_create = async (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                    err.message || "Some error occurred while creating user."
             });
         });
 }
 
-export const OUSR_findAll = async (req, res) => {
+export const OUSR_find_user = async (req, res) => {
     const user_email = req.query.user_email;
-    var condition = user_email ? { user_email: user_email } : null;
+    const phone_number = req.query.phone_number;
+    // FOR SEARCH SIMILIAR
+    // var condition = source ? { user_email: { [Op.like]: `%${user_email}%` } } : null;
+    var condition;
+
+    if (user_email && phone_number) { 
+        condition = { user_email: user_email, phone_number: phone_number } 
+    }
+    else if (user_email && !phone_number) { 
+        condition = { user_email: user_email } 
+    }
+    else if(phone_number && !user_email)  {
+        condition = { phone_number: phone_number }
+    } else { null }
 
     OUSR_Model.findAll({ where: condition })
         .then(data => {
@@ -58,27 +71,7 @@ export const OUSR_findAll = async (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
-            });
-        });
-}
-
-export const OUSR_findOne = async (req, res) => {
-    const source = req.params.id_ousr;
-
-    OUSR_Model.findByPk(id_ousr)
-        .then(data => {
-            if (!isEmptyObject(data)) {
-                res.status(200).send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find olog with id_ousr=${id_ousr}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving olog with id_ousr=" + id_ousr
+                    err.message || "Some error occurred while retrieving user email."
             });
         });
 }

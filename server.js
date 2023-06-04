@@ -9,21 +9,18 @@ const app = express();
 
 // app.use(cors(corsOptions));
 app.use(
-    cors({
-      credentials: true,
-      allowedHeaders: "*",
-      allowedOrigins: "*",
-    })
-  );
+  cors({
+    credentials: true,
+    allowedHeaders: "*",
+    allowedOrigins: "*",
+  })
+);
 
-// parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 import db from "./config/db.config.js"
-// Testing database connection
 try {
     await db.authenticate();
     console.log("Connection has been established successfully.");
@@ -31,13 +28,10 @@ try {
     console.error("Unable to connect to the database:", error);
 }
 
-// simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+    res.json({ message: "Welcome to 'Hello World'" });
 });
 
-// set port, listen for requests
-// require("./routes/olog.routes.js").default(app);
 import Router from "./routes/routes.js";
 app.use(Router)
 

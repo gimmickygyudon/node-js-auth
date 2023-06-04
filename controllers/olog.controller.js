@@ -1,6 +1,5 @@
-// import db from "../models/index.js";
 import db from "../config/db.config.js";
-import Model from "../models/olog.model.js";
+import OLOG_Model from "../models/olog.model.js";
 const Op = db.Sequelize.Op;
 
 function isEmptyObject(obj) {
@@ -12,7 +11,7 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const create = async (req, res) => {
+export const OLOG_create = async (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -21,7 +20,6 @@ export const create = async (req, res) => {
         return;
     }
 
-    // Create a Tutorial
     const olog = {
         id_olog: req.body.id_olog,
         date_time: req.body.date_time,
@@ -30,9 +28,7 @@ export const create = async (req, res) => {
         source: req.body.source,
     };
 
-    // Save Tutorial in the database
-    
-    Model.create(req.body)
+    OLOG_Model.create(req.body)
         .then(data => {
             res.status(201).send(data);
         })
@@ -44,12 +40,12 @@ export const create = async (req, res) => {
         });
 }
 
-// Retrieve all Tutorials from the database.
-export const findAll = async (req, res) => {
+export const OLOG_find_source = async (req, res) => {
     const source = req.query.source;
-    var condition = source ? { source: { [Op.like]: `%${source}%` } } : null;
+    // var condition = source ? { source: { [Op.like]: `%${source}%` } } : null;
+    var condition = source ? { source: source } : null;
 
-    Model.findAll({ where: condition })
+    OLOG_Model.findAll({ where: condition })
         .then(data => {
             if (!isEmptyObject(data)) {
                 res.status(200).send(data);
@@ -67,51 +63,29 @@ export const findAll = async (req, res) => {
         });
 }
 
-// Find a single Tutorial with an id
-export const findOne = async (req, res) => {
-    const source = req.params.id_olog;
+//  export function update(req, res) {
+//      const id_olog = req.params.id_olog;
 
-    Model.findByPk(id_olog)
-        .then(data => {
-            if (!isEmptyObject(data)) {
-                res.status(200).send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find olog with id_olog=${id_olog}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving olog with id_olog=" + id_olog
-            });
-        });
-}
-
-// Update a Tutorial by the id in the request
-export function update(req, res) {
-    const id_olog = req.params.id_olog;
-
-    db.update(req.body, {
-        where: { id_olog: id_olog }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Tutorial was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Tutorial with id=${id_olog}. Maybe Tutorial was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Tutorial with id=" + id_olog
-            });
-        });
-}
+//      db.update(req.body, {
+//          where: { id_olog: id_olog }
+//      })
+//          .then(num => {
+//              if (num == 1) {
+//                  res.send({
+//                      message: "Tutorial was updated successfully."
+//                  });
+//              } else {
+//                  res.send({
+//                      message: `Cannot update Tutorial with id=${id_olog}. Maybe Tutorial was not found or req.body is empty!`
+//                  });
+//              }
+//          })
+//          .catch(err => {
+//              res.status(500).send({
+//                  message: "Error updating Tutorial with id=" + id_olog
+//              });
+//          });
+//  }
 
 //  // Delete a Tutorial with the specified id in the request
 //  const _delete = (req, res) => {
