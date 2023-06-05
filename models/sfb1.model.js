@@ -2,23 +2,20 @@ import { Sequelize } from "sequelize";
 import db from "../config/db.config.js";
 const { DataTypes } = Sequelize;
 
-const simOLOG = db.define(
-    "OLOG",
+const simSFB1 = db.define(
+    "OSFB",
     {
-        id_olog: {
+        id_sfb1: {
             type: DataTypes.INTEGER,
             primaryKey: true,
         },
-        date_time: {
+        id_osfb: {
             type: DataTypes.STRING,
         },
-        form_sender: {
+        type_feed: {
             type: DataTypes.STRING,
         },
-        remarks: {
-            type: DataTypes.STRING,
-        },
-        source: {
+        description: {
             type: DataTypes.STRING,
         },
     },
@@ -28,4 +25,4 @@ const simOLOG = db.define(
     }
 );
 
-export default simOLOG;
+export default simSFB1;

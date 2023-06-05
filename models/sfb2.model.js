@@ -2,25 +2,28 @@ import { Sequelize } from "sequelize";
 import db from "../config/db.config.js";
 const { DataTypes } = Sequelize;
 
-const simOLOG = db.define(
-    "OLOG",
+const simSFB2 = db.define(
+    "OSFB",
     {
-        id_olog: {
+        id_sfb2: {
             type: DataTypes.INTEGER,
             primaryKey: true,
         },
-        date_time: {
+        id_osfb: {
             type: DataTypes.STRING,
         },
-        form_sender: {
+        type: {
             type: DataTypes.STRING,
         },
-        remarks: {
+        file_name: {
             type: DataTypes.STRING,
         },
-        source: {
+        file_type: {
             type: DataTypes.STRING,
         },
+        file_path: {
+            path: DataTypes.STRING,
+        }
     },
     {
         freezeTableName: true,
@@ -28,4 +31,4 @@ const simOLOG = db.define(
     }
 );
 
-export default simOLOG;
+export default simSFB2;

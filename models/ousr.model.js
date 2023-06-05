@@ -3,7 +3,7 @@ import db from "../config/db.config.js";
 const { DataTypes } = Sequelize;
 
 const simOUSR = db.define(
-    "ousr",
+    "OUSR",
     {
         id_ousr: {
             type: DataTypes.INTEGER,
