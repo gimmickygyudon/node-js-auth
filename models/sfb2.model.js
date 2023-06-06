@@ -3,7 +3,7 @@ import db from "../config/db.config.js";
 const { DataTypes } = Sequelize;
 
 const simSFB2 = db.define(
-    "OSFB",
+    "SFB2",
     {
         id_sfb2: {
             type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ const simSFB2 = db.define(
             type: DataTypes.STRING,
         },
         file_path: {
-            path: DataTypes.STRING,
+            type: DataTypes.STRING,
         }
     },
     {

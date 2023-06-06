@@ -3,7 +3,7 @@ import db from "../config/db.config.js";
 const { DataTypes } = Sequelize;
 
 const simSFB1 = db.define(
-    "OSFB",
+    "SFB1",
     {
         id_sfb1: {
             type: DataTypes.INTEGER,

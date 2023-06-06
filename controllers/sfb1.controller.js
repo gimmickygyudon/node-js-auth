@@ -1,5 +1,5 @@
 import db from "../config/db.config.js";
-import OSFB_Model from "../models/osfb.model.js";
+import SFB1_Model from "../models/sfb1.model.js";
 const Op = db.Sequelize.Op;
 
 function isEmptyObject(obj) {
@@ -11,7 +11,7 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const OSFB_create = async (req, res) => {
+export const SFB1_create = async (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -20,7 +20,7 @@ export const OSFB_create = async (req, res) => {
         return;
     }
 
-    OSFB_Model.create(req.body)
+    SFB1_Model.create(req.body)
         .then(data => {
             res.status(201).send(data);
         })
@@ -32,11 +32,11 @@ export const OSFB_create = async (req, res) => {
         });
 }
 
-export const OSFB_find_id_ousr = async (req, res) => {
+export const SFB1_find_id_ousr = async (req, res) => {
     const id_osfb = req.query.id_osfb;
     var condition = id_osfb ? { id_osfb: id_osfb } : null;
 
-    OSFB_Model.findAll({ where: condition })
+    SFB1_Model.findAll({ where: condition })
         .then(data => {
             if (!isEmptyObject(data)) {
                 res.status(200).send(data);

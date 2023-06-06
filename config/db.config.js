@@ -12,4 +12,4 @@ const db = new Sequelize("mis", "mysql_client", "1BMclient!", {
     timezone: "+07:00",
 });
 
-export default db_local;
+export default db;
