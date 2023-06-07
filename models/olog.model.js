@@ -8,6 +8,7 @@ const simOLOG = db.define(
         id_olog: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         date_time: {
             type: DataTypes.STRING,
@@ -19,6 +20,9 @@ const simOLOG = db.define(
             type: DataTypes.STRING,
         },
         source: {
+            type: DataTypes.STRING,
+        },
+        id_ousr: {
             type: DataTypes.STRING,
         },
     },

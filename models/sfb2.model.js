@@ -8,6 +8,7 @@ const simSFB2 = db.define(
         id_sfb2: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         id_osfb: {
             type: DataTypes.STRING,

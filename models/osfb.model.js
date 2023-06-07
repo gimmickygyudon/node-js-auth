@@ -8,6 +8,7 @@ const simOSFB = db.define(
         id_osfb: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         document_date: {
             type: DataTypes.STRING,

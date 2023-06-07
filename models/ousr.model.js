@@ -8,6 +8,7 @@ const simOUSR = db.define(
         id_ousr: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         login_type: {
             type: DataTypes.STRING,

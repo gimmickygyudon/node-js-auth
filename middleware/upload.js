@@ -4,17 +4,16 @@ import SharpMulter from "sharp-multer";
 
 const maxSize = 2 * 3645 * 3645; // 2MB
 
-const storage_ = multer({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, __basedir + "/resources/static/assets/uploads");
   },
   filename: (req, file, cb) => {
-    console.log(file.filename);
-    cb(null, file.filename);
+    console.log(file.originalname);
+    cb(null, file.originalname);
   },
 });
-
-const storage = SharpMulter({
+const storage_ = SharpMulter({
   destination: (req, file, cb) => {
     cb(null, __basedir + "/resources/static/assets/uploads");
   },
@@ -25,12 +24,12 @@ const storage = SharpMulter({
     const ext = file.mimetype.split("/")[1];
     cb(null, `${file.originalname}-${Date.now()}.${ext}`);
   },
-   imageOptions: {
-     useTimestamp: true,
-     fileFormat: "jpg",
-     quality: 10,
-     resize: { width: 500, height: 500 },
-   },
+  //  imageOptions: {
+  //    useTimestamp: true,
+  //    fileFormat: "jpg",
+  //    quality: 10,
+  //    resize: { width: 500, height: 500 },
+  //  },
 });
 
 let uploadFile = multer({
