@@ -19,6 +19,9 @@ const simOSFB = db.define(
         remarks: {
             type: DataTypes.STRING,
         },
+        is_active: {
+            type: DataTypes.STRING
+        }
     },
     {
         freezeTableName: true,

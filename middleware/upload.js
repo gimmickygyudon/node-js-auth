@@ -22,7 +22,7 @@ const storage_ = SharpMulter({
       `Filename : ${file.originalname};}`
     );
     const ext = file.mimetype.split("/")[1];
-    cb(null, `${file.originalname}-${Date.now()}.${ext}`);
+    cb(null, path.parse(file.originalname) + Date.now() + path.extname(file.originalname));
   },
   //  imageOptions: {
   //    useTimestamp: true,
