@@ -2,7 +2,19 @@ import db from "../config/db.config.js";
 import OSFB_Model from "../models/osfb.model.js";
 import SFB1_Model from "../models/sfb1.model.js";
 import SFB2_Model from "../models/sfb2.model.js";
+import { Sequelize } from "sequelize";
 const Op = db.Sequelize.Op;
+
+Sequelize.addHook('beforeCount', function (options) {
+  if (this._scope.include && this._scope.include.length > 0) {
+    options.distinct = true
+    options.col = this._scope.col || options.col || `"${this.options.name.singular}".id`
+  }
+
+  if (options.include && options.include.length > 0) {
+    options.include = null
+  }
+})
 
 function isEmptyObject(obj) {
     for (var key in obj) {
@@ -58,16 +70,21 @@ export const OSFB_find_id_ousr = async (req, res) => {
 }
 
 export const OSFB_join_list = async (req, res) => {
-    const id_osfb = req.query.id_osfb;
-    var condition = id_osfb ? { id_osfb: id_osfb } : null;
+    const id_ousr = req.query.id_ousr;
+    var condition = id_ousr ? { id_ousr: id_ousr } : null;
 
-    OSFB_Model.findAll({ 
+    OSFB_Model.findAndCountAll({
         where: condition,
-        attributes: ['id_osfb'],
-        include: [
-            {model:SFB1_Model, attributes:['id_osfb']},
-            {model:SFB2_Model, attributes:['id_osfb']},
-        ]
+        offset: req.query.offset ? parseInt(req.query.offset) : null,
+        limit: req.query.offset ? parseInt(req.query.limit) : null,
+        order: [['document_date', 'DESC']],
+        distinct: id_ousr,
+        include: [{
+            model:SFB1_Model,
+            include: [{
+                model:SFB2_Model,
+            }]
+        }]
         })
         .then(data => {
             if (!isEmptyObject(data)) {

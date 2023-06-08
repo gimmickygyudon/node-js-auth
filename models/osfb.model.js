@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/db.config.js";
+import simSFB1 from "./sfb1.model.js";
+import simSFB2 from "./sfb2.model.js";
 const { DataTypes } = Sequelize;
 
 const simOSFB = db.define(
@@ -28,5 +30,11 @@ const simOSFB = db.define(
         timestamps: false,
     }
 );
+
+simOSFB.hasOne(simSFB1, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
+// simOSFB.hasOne(simSFB2, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
+
+simSFB1.hasMany(simSFB2, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
+simSFB1.belongsTo(simOSFB, {foreignKey: 'id_osfb'});
 
 export default simOSFB;

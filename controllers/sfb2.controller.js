@@ -12,6 +12,10 @@ function isEmptyObject(obj) {
     return true;
 }
 
+function removeExtension(filename) {
+  return filename.substring(0, filename.lastIndexOf('.')) || filename;
+}
+
 export const SFB2_create = async (req, res) => {
     // Validate request
     if (!req.body) {

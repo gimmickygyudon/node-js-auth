@@ -36,7 +36,9 @@ export const SFB1_find_id_ousr = async (req, res) => {
     const id_osfb = req.query.id_osfb;
     var condition = id_osfb ? { id_osfb: id_osfb } : null;
 
-    SFB1_Model.findAll({ where: condition })
+    SFB1_Model.findAll({ 
+        where: condition,
+        })
         .then(data => {
             if (!isEmptyObject(data)) {
                 res.status(200).send(data);
