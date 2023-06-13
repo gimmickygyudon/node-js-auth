@@ -6,13 +6,28 @@ const db_local = new Sequelize("indostar", "root", "", {
     timezone: "+07:00",
 })
 
-const db = new Sequelize("mis", "mysql_client", "1BMclient!", {
+export const db = new Sequelize("mis", "mysql_client", "1BMclient!", {
     host: "192.168.1.8",
     dialect: "mysql",
     timezone: "+07:00",
     dialectOptions: {
       dateStrings: true,
-      typeCast: function (field, next) { // for reading from database
+      typeCast: function (field, next) {
+        if (field.type === 'DATETIME') {
+          return field.string()
+        }
+          return next()
+        },
+    },
+});
+
+export const db_sim = new Sequelize("sim", "mysql_client", "1BMclient!", {
+    host: "192.168.1.8",
+    dialect: "mysql",
+    timezone: "+07:00",
+    dialectOptions: {
+      dateStrings: true,
+      typeCast: function (field, next) {
         if (field.type === 'DATETIME') {
           return field.string()
         }

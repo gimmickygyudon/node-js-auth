@@ -32,7 +32,6 @@ const simOSFB = db.define(
 );
 
 simOSFB.hasOne(simSFB1, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
-// simOSFB.hasOne(simSFB2, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
 
 simSFB1.hasMany(simSFB2, {foreignKey: 'id_osfb', sourceKey: 'id_osfb'});
 simSFB1.belongsTo(simOSFB, {foreignKey: 'id_osfb'});

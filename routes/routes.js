@@ -5,6 +5,9 @@ import { OSFB_create, OSFB_find_id_ousr, OSFB_join_list } from "../controllers/o
 import { SFB1_create, SFB1_find_id_ousr } from "../controllers/sfb1.controller.js";
 import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.js";
 
+import { OITM_find_id, OITM_find_by_name } from "../controllers/sim.oitm.controller.js";
+import { sim_BRN1_find_id } from "../controllers/sim.brn1.controller.js";
+
 import controller from "../controllers/file.controller.js";
 
 const router = express.Router();
@@ -27,6 +30,11 @@ router.get("/api/sfb2", SFB2_find_id_ousr);
 router.post("/api/upload", controller.upload);
 router.get("/api/files", controller.getListFiles);
 router.get("/api/files/:name", controller.download);
+
+router.get("/api/sim/oitm/id", OITM_find_id);
+router.get("/api/sim/oitm/", OITM_find_by_name);
+
+router.get("/api/sim/brn1", sim_BRN1_find_id);
 
 //router.put("/:id", olog.update);
 
