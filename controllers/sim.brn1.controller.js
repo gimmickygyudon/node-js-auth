@@ -21,9 +21,9 @@ export const sim_BRN1_find_id = async (req, res) => {
         where: condition,
         distinct: id_brn1,
         include: [{
+            where: { is_mobile_app: 1 },
             plain: true,
             distinct: id_brn1,
-            plain: true,
             model:sim_OITM_MODEL
         }]
     })
