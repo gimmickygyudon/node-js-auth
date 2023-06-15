@@ -20,6 +20,9 @@ export const sim_BRN1_find_id = async (req, res) => {
     sim_BRN1_MODEL.findAll({ 
         where: condition,
         distinct: id_brn1,
+        order: [
+            [ { model:sim_OITM_MODEL }, 'spesification', 'DESC' ]
+        ],
         include: [{
             where: { is_mobile_app: 1 },
             plain: true,
