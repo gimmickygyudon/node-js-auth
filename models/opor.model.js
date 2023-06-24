@@ -50,7 +50,7 @@ const simOPOR = db.define(
         },
         status_remarks: {
             type: DataTypes.STRING,
-            defaultValue: NULL
+            defaultValue: "NULL"
         },
         payment_type: {
             type: DataTypes.STRING,

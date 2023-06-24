@@ -11,7 +11,7 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const OLOG_create = async (req, res) => {
+export const OPOR_create = async (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({

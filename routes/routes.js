@@ -19,6 +19,7 @@ import { sim_OVIL_find_id } from "../controllers/sim.ovil.controller.js";
 
 // Payment Controllers
 import { OPTY_findAll } from "../controllers/opty.controller.js";
+import { OPOR_create } from "../controllers/opor.controller.js";
 
 // Upload Controllers
 import controller from "../controllers/file.controller.js";
@@ -61,6 +62,7 @@ router.get("/api/sim/ovil", sim_OVIL_find_id);
 
 // API Payment
 router.get("/api/opty", OPTY_findAll);
+router.post("/api/opor", OPOR_create);
 
 
 
