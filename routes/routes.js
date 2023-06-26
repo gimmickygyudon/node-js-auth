@@ -18,8 +18,12 @@ import { sim_OSDT_find_id } from "../controllers/sim.osdt.controller.js";
 import { sim_OVIL_find_id } from "../controllers/sim.ovil.controller.js";
 
 // Payment Controllers
-import { OPTY_findAll } from "../controllers/opty.controller.js";
-import { OPOR_create } from "../controllers/opor.controller.js";
+import { PurchaseOrder_insert, PurchaseOrder_retrieveAll } from "../controllers/PurchaseOrder.controller.js";
+
+    // Deprecated
+    import { OPTY_findAll } from "../controllers/opty.controller.js";
+    import { OPOR_create } from "../controllers/opor.controller.js";
+    // Deprecated
 
 // Upload Controllers
 import controller from "../controllers/file.controller.js";
@@ -60,13 +64,15 @@ router.get("/api/sim/octy", sim_OCTY_find_id);
 router.get("/api/sim/osdt", sim_OSDT_find_id);
 router.get("/api/sim/ovil", sim_OVIL_find_id);
 
+
 // API Payment
-router.get("/api/opty", OPTY_findAll);
-router.post("/api/opor", OPOR_create);
+router.post("/api/po", PurchaseOrder_insert);
+router.get("/api/po", PurchaseOrder_retrieveAll);
 
-
-
-
+    // Deprecated
+    router.get("/api/opty", OPTY_findAll);
+    router.post("/api/opor", OPOR_create);
+    // Deprecated
 
 
 //router.put("/:id", olog.update);

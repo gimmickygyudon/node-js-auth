@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/db.config.js";
+import simUSR1 from "./usr1.model.js";
+import simPOR1 from "./por1.model.js";
 const { DataTypes } = Sequelize;
 
 const simOPOR = db.define(
@@ -19,7 +21,7 @@ const simOPOR = db.define(
         id_ousr: {
             type: DataTypes.STRING,
         },
-        id_usrl: {
+        id_usr1: {
             type: DataTypes.STRING,
         },
         posting_date: {
@@ -29,6 +31,9 @@ const simOPOR = db.define(
         document_date: {
             type: DataTypes.DATE,
             defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+        },
+        delivery_type: {
+            type: DataTypes.STRING,
         },
         delivery_date: {
             type: DataTypes.STRING,
@@ -61,5 +66,12 @@ const simOPOR = db.define(
         timestamps: false,
     }
 );
+
+
+simOPOR.hasOne(simUSR1, {foreignKey: 'id_usr1', sourceKey: 'id_usr1'});
+simUSR1.belongsTo(simOPOR, {foreignKey: 'id_usr1'});
+
+simOPOR.hasMany(simPOR1, {foreignKey: 'id_opor', sourceKey: 'id_opor'});
+simPOR1.belongsTo(simOPOR, {foreignKey: 'id_opor'});
 
 export default simOPOR;

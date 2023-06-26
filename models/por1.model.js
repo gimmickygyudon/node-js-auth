@@ -16,19 +16,20 @@ const simPOR1 = db.define(
         id_oitm: {
             type: DataTypes.STRING,
         },
-        order_pty: {
-            type: DataTypes.STRING,
+        order_qty: {
+            type: DataTypes.INTEGER,
         },
         delivery_qty: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
         },
         item_status: {
             type: DataTypes.STRING,
-            defaultValue: OPEN,
+            defaultValue: 'OPEN',
         },
         item_remarks: {
             type: DataTypes.STRING,
-            defaultValue: NULL,
+            defaultValue: null,
         },
     },
     {
