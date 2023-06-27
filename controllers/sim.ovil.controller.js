@@ -11,9 +11,16 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const sim_OVIL_find_id = async (req, res) => {
+export const sim_OVIL_find = async (req, res) => {
     const id_osdt = req.query.id_osdt;
-    var condition = id_osdt ? { id_osdt: id_osdt } : null;
+    const id_ovil = req.query.id_ovil;
+
+    var condition;
+    if (id_osdt) {
+        condition = id_osdt ? { id_osdt: id_osdt } : null;
+    } else {
+        condition = id_ovil ? { id_ovil: id_ovil } : null;
+    }
 
     OVIL_Model.findAll({where: condition})
         .then(data => {

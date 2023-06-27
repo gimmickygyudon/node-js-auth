@@ -8,14 +8,15 @@ import { SFB1_create, SFB1_find_id_ousr } from "../controllers/sfb1.controller.j
 import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.js";
 
 // Item Controllers
-import { OITM_find_id, OITM_find_by_name } from "../controllers/sim.oitm.controller.js";
+import { OITM_find } from "../controllers/sim.oitm.controller.js";
 import { sim_BRN1_find_id } from "../controllers/sim.brn1.controller.js";
 
 // Address Controllers
-import { sim_OPRV_find_name } from "../controllers/sim.oprv.controller.js";
-import { sim_OCTY_find_id } from "../controllers/sim.octy.controller.js";
-import { sim_OSDT_find_id } from "../controllers/sim.osdt.controller.js";
-import { sim_OVIL_find_id } from "../controllers/sim.ovil.controller.js";
+import { sim_OPRV_find } from "../controllers/sim.oprv.controller.js";
+import { sim_OCTY_find } from "../controllers/sim.octy.controller.js";
+import { sim_OSDT_find } from "../controllers/sim.osdt.controller.js";
+import { sim_OVIL_find } from "../controllers/sim.ovil.controller.js";
+import { USR1_findby_id } from "../controllers/usr1.controller.js";
 
 // Payment Controllers
 import { PurchaseOrder_insert, PurchaseOrder_retrieveAll } from "../controllers/PurchaseOrder.controller.js";
@@ -54,15 +55,15 @@ router.get("/api/files", controller.getListFiles);
 router.get("/api/files/:name", controller.download);
 
 // API Item
-router.get("/api/sim/oitm/id", OITM_find_id);
-router.get("/api/sim/oitm/", OITM_find_by_name);
+router.get("/api/sim/oitm/", OITM_find);
 router.get("/api/sim/brn1", sim_BRN1_find_id);
 
 // API Address
-router.get("/api/sim/oprv", sim_OPRV_find_name);
-router.get("/api/sim/octy", sim_OCTY_find_id);
-router.get("/api/sim/osdt", sim_OSDT_find_id);
-router.get("/api/sim/ovil", sim_OVIL_find_id);
+router.get("/api/sim/oprv", sim_OPRV_find);
+router.get("/api/sim/octy", sim_OCTY_find);
+router.get("/api/sim/osdt", sim_OSDT_find);
+router.get("/api/sim/ovil", sim_OVIL_find);
+router.get("/api/usr1", USR1_findby_id);
 
 
 // API Payment

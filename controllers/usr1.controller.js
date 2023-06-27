@@ -1,6 +1,6 @@
-import OITM_Model from "../models/sim.oitm.model.js";
-import db_sim from "../config/sim.db.config.js";
-const Op = db_sim.Sequelize.Op;
+import db from "../config/db.config.js";
+import USR1_Model from "../models/usr1.model.js";
+const Op = db.Sequelize.Op;
 
 function isEmptyObject(obj) {
     for (var key in obj) {
@@ -11,17 +11,17 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const OITM_find = async (req, res) => {
-    const id_oitm = req.query.id_oitm;
-    var condition = id_oitm ? { id_oitm: id_oitm } : null;
+export const USR1_findby_id = async (req, res) => {
+    const id_usr1 = req.query.id_usr1;
+    var condition = id_usr1 ? { id_usr1: id_usr1 } : null;
 
-    OITM_Model.findAll({ where: condition })
+    USR1_Model.findAll({ where: condition })
         .then(data => {
             if (!isEmptyObject(data)) {
                 res.status(200).send(data);
             } else {
                 res.status(404).send({
-                    message: `Cannot find olog with source=${source}.`
+                    message: `Cannot find usr1 with source=${source}.`
                 });
             }
         })

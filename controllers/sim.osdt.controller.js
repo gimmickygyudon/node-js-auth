@@ -11,9 +11,16 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const sim_OSDT_find_id = async (req, res) => {
+export const sim_OSDT_find = async (req, res) => {
     const id_octy = req.query.id_octy;
-    var condition = id_octy ? { id_octy: id_octy } : null;
+    const id_osdt = req.query.id_osdt;
+
+    var condition;
+    if (id_octy) {
+        condition = id_octy ? { id_octy: id_octy } : null;
+    } else {
+        condition = id_osdt ? { id_osdt: id_osdt } : null;
+    }
 
     OSDT_Model.findAll({where: condition})
         .then(data => {

@@ -11,9 +11,16 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const sim_OPRV_find_name = async (req, res) => {
+export const sim_OPRV_find = async (req, res) => {
     const province_name = req.query.province_name;
-    var condition = province_name ? { province_name: province_name } : null;
+    const id_oprv = req.query.id_oprv;
+
+    var condition;
+    if (province_name) {
+        condition = province_name ? { province_name: province_name } : null;
+    } else {
+        condition = id_oprv ? { id_oprv: id_oprv } : null;
+    }
 
     OPRV_Model.findAll({where: condition})
         .then(data => {
