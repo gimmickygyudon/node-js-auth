@@ -19,7 +19,7 @@ import { sim_OVIL_find } from "../controllers/sim.ovil.controller.js";
 import { USR1_findby_id } from "../controllers/usr1.controller.js";
 
 // Payment Controllers
-import { PurchaseOrder_insert, PurchaseOrder_retrieveAll } from "../controllers/PurchaseOrder.controller.js";
+import { PurchaseOrder_insert, PurchaseOrder_retrieve } from "../controllers/PurchaseOrder.controller.js";
 
     // Deprecated
     import { OPTY_findAll } from "../controllers/opty.controller.js";
@@ -68,7 +68,7 @@ router.get("/api/usr1", USR1_findby_id);
 
 // API Payment
 router.post("/api/po", PurchaseOrder_insert);
-router.get("/api/po", PurchaseOrder_retrieveAll);
+router.get("/api/po", PurchaseOrder_retrieve);
 
     // Deprecated
     router.get("/api/opty", OPTY_findAll);

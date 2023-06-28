@@ -107,12 +107,22 @@ export const PurchaseOrder_insert = async (req, res) => {
         });
 }
 
-export const PurchaseOrder_retrieveAll = async (req, res) => {
+export const PurchaseOrder_retrieve = async (req, res) => {
+    const id_ousr = req.query.id_ousr
+    var condition = id_ousr ? { id_ousr: id_ousr } : null;
+
     OPOR_Model.findAll({
-        order: [['document_date', 'DESC']],
+        where: condition,
+        distinct: id_ousr,
+        order: [['id_opor', 'DESC']],
         include: [
-            { model: USR1_Model },
-            { model: POR1_Model }
+            {
+                distinct: id_ousr,
+                model: USR1_Model
+            }, {
+                plain: true,
+                model: POR1_Model
+            }
         ]
     })
         .then(data => {
