@@ -26,6 +26,9 @@ import { PurchaseOrder_insert, PurchaseOrder_retrieve } from "../controllers/Pur
     import { OPOR_create } from "../controllers/opor.controller.js";
     // Deprecated
 
+// YT Video Controllers
+import { YVID_find } from "../controllers/YoutubeVids.controller.js";
+
 // Upload Controllers
 import controller from "../controllers/file.controller.js";
 
@@ -65,15 +68,17 @@ router.get("/api/sim/osdt", sim_OSDT_find);
 router.get("/api/sim/ovil", sim_OVIL_find);
 router.get("/api/usr1", USR1_findby_id);
 
-
 // API Payment
 router.post("/api/po", PurchaseOrder_insert);
 router.get("/api/po", PurchaseOrder_retrieve);
 
-    // Deprecated
-    router.get("/api/opty", OPTY_findAll);
-    router.post("/api/opor", OPOR_create);
-    // Deprecated
+        // Deprecated
+        router.get("/api/opty", OPTY_findAll);
+        router.post("/api/opor", OPOR_create);
+        // Deprecated
+
+// API Videos
+router.get("/api/yvid", YVID_find);
 
 
 //router.put("/:id", olog.update);
