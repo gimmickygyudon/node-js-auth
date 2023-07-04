@@ -7,6 +7,9 @@ import { OSFB_create, OSFB_join_list } from "../controllers/osfb.controller.js";
 import { SFB1_create, SFB1_find_id_ousr } from "../controllers/sfb1.controller.js";
 import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.js";
 
+// Customer Controllers
+import { customer_create, customer_retrieve } from "../controllers/customer.controller.js";
+
 // Item Controllers
 import { OITM_find } from "../controllers/sim.oitm.controller.js";
 import { sim_BRN1_find_id } from "../controllers/sim.brn1.controller.js";
@@ -51,6 +54,10 @@ router.get("/api/sfb1", SFB1_find_id_ousr);
 
 router.post("/api/sfb2", SFB2_create);
 router.get("/api/sfb2", SFB2_find_id_ousr);
+
+// API Customer
+router.post("/api/usr2", customer_create);
+router.get("/api/usr2", customer_retrieve);
 
 // API Upload
 router.post("/api/upload", controller.upload);
