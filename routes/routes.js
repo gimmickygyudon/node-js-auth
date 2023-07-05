@@ -8,7 +8,8 @@ import { SFB1_create, SFB1_find_id_ousr } from "../controllers/sfb1.controller.j
 import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.js";
 
 // Customer Controllers
-import { customer_create, customer_retrieve } from "../controllers/customer.controller.js";
+import { customer_create, customer_delete, customer_retrieve } from "../controllers/customer.controller.js";
+import { reportDO_retrieve } from "../controllers/ReportDeliveryOrder.controller.js";
 
 // Item Controllers
 import { OITM_find } from "../controllers/sim.oitm.controller.js";
@@ -23,11 +24,9 @@ import { USR1_findby_id } from "../controllers/usr1.controller.js";
 
 // Payment Controllers
 import { PurchaseOrder_insert, PurchaseOrder_retrieve } from "../controllers/PurchaseOrder.controller.js";
-
-    // Deprecated
-    import { OPTY_findAll } from "../controllers/opty.controller.js";
-    import { OPOR_create } from "../controllers/opor.controller.js";
-    // Deprecated
+// Deprecated
+import { OPTY_findAll } from "../controllers/opty.controller.js";
+import { OPOR_create } from "../controllers/opor.controller.js";
 
 // YT Video Controllers
 import { YVID_find } from "../controllers/YoutubeVids.controller.js";
@@ -58,6 +57,8 @@ router.get("/api/sfb2", SFB2_find_id_ousr);
 // API Customer
 router.post("/api/usr2", customer_create);
 router.get("/api/usr2", customer_retrieve);
+router.delete("/api/usr2", customer_delete);
+router.get("/api/sim2/do", reportDO_retrieve);
 
 // API Upload
 router.post("/api/upload", controller.upload);
@@ -78,11 +79,9 @@ router.get("/api/usr1", USR1_findby_id);
 // API Payment
 router.post("/api/po", PurchaseOrder_insert);
 router.get("/api/po", PurchaseOrder_retrieve);
-
-        // Deprecated
-        router.get("/api/opty", OPTY_findAll);
-        router.post("/api/opor", OPOR_create);
-        // Deprecated
+// Deprecated
+router.get("/api/opty", OPTY_findAll);
+router.post("/api/opor", OPOR_create);
 
 // API Videos
 router.get("/api/yvid", YVID_find);

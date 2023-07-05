@@ -52,3 +52,28 @@ export const customer_retrieve = async (req, res) => {
             });
         });
 }
+
+export const customer_delete = (req, res) => {
+    const id_usr2 = req.query.id_usr2;
+    const id_usr2_array = id_usr2 ? JSON.parse("[" + id_usr2 + "]") : null;
+
+    USR2_Model.destroy({
+        where: { id_usr2: id_usr2_array }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Customer was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Customer with id_usr2=${id_usr2}. Maybe Tutorial was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Customer with id_usr2=" + id_usr2
+            });
+        });
+};
