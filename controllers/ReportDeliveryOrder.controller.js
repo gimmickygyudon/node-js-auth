@@ -16,13 +16,28 @@ function isEmptyObject(obj) {
 export const reportDO_retrieve = async (req, res) => {
     const id_ocst = req.query.id_ocst;
     const surat_jalan_date = req.query.surat_jalan_date;
+    const from_date = req.query.from_date;
+    const to_date = req.query.to_date;
 
-    var condition = id_ocst ? {
-        parent_code: id_ocst,
-        surat_jalan_date: {
-            [Op.like]: `%${surat_jalan_date}%`
+    var condition
+
+    if (id_ocst && from_date == null && to_date == null) {
+        condition = {
+            parent_code: id_ocst,
+            surat_jalan_date: {
+                [Op.like]: `%${surat_jalan_date}%`
+            }
         }
-    } : null;
+    } else if (id_ocst && from_date && to_date ) {
+        condition = {
+            parent_code: id_ocst,
+            surat_jalan_date: {
+                [Op.between]: [from_date, to_date],
+            }
+        }
+    } else {
+        condition = null
+    }
 
     sim2_VODOR_MODEL.findAll({
         where: condition,
@@ -41,10 +56,13 @@ export const reportDO_retrieve = async (req, res) => {
             })
             .then(data => {
                 const outstanding = (data[0].dataValues.outstanding / 1000).toFixed(2)
-                console.log(outstanding)
+                res.status(200).send(
+                    [{
+                        'realisasi': realisasi,
+                        'outstanding': outstanding
+                    }]
+                );
             })
-
-            res.status(200).send(data);
         } else {
             res.status(404).send({
                 message: `Cannot find id_ocst with id_ocst=${id_ocst}.`
