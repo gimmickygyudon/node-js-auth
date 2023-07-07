@@ -42,24 +42,32 @@ export const reportDO_retrieve = async (req, res) => {
     sim2_VODOR_MODEL.findAll({
         where: condition,
         attributes: [
+            [sequelize.fn('count', sequelize.col('tonage')), 'count'],
             [sequelize.fn('sum', sequelize.col('tonage')), 'realisasi'],
         ],
+        distinct: true,
     })
     .then(data => {
         if (!isEmptyObject(data)) {
             const realisasi = (data[0].dataValues.realisasi / 1000).toFixed(2)
+            const realisasi_count = data[0].dataValues.count
             sim2_VOTSR_MODEL.findAll({
                 where: { parent_code: id_ocst },
                 attributes: [
+                    [sequelize.fn('count', sequelize.col('tonage')), 'count'],
                     [sequelize.fn('sum', sequelize.col('tonage')), 'outstanding'],
-                ]
+                ],
+                distinct: true,
             })
             .then(data => {
                 const outstanding = (data[0].dataValues.outstanding / 1000).toFixed(2)
+                const outstanding_count = data[0].dataValues.count
                 res.status(200).send(
                     [{
                         'realisasi': realisasi,
-                        'outstanding': outstanding
+                        'realisasi_count': realisasi_count,
+                        'outstanding': outstanding,
+                        'outstanding_count': outstanding_count
                     }]
                 );
             })
