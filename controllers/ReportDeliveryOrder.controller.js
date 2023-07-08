@@ -13,7 +13,7 @@ function isEmptyObject(obj) {
     return true;
 }
 
-export const reportDO_retrieve = async (req, res) => {
+export const reportDeliveryOrder_retrieve = async (req, res) => {
     const id_ocst = req.query.id_ocst;
     const surat_jalan_date = req.query.surat_jalan_date;
     const from_date = req.query.from_date;

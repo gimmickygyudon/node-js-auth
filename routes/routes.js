@@ -9,7 +9,8 @@ import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.j
 
 // Customer Controllers
 import { customer_create, customer_delete, customer_retrieve } from "../controllers/customer.controller.js";
-import { reportDO_retrieve } from "../controllers/ReportDeliveryOrder.controller.js";
+import { reportDeliveryOrder_retrieve } from "../controllers/ReportDeliveryOrder.controller.js";
+import { reportBalanceDue_retrieve } from "../controllers/ReportBalanceDue.controller.js";
 
 // Item Controllers
 import { OITM_find } from "../controllers/sim.oitm.controller.js";
@@ -58,7 +59,8 @@ router.get("/api/sfb2", SFB2_find_id_ousr);
 router.post("/api/usr2", customer_create);
 router.get("/api/usr2", customer_retrieve);
 router.delete("/api/usr2", customer_delete);
-router.get("/api/sim2/do", reportDO_retrieve);
+router.get("/api/sim2/do", reportDeliveryOrder_retrieve);
+router.get("/api/sim_report/arr", reportBalanceDue_retrieve);
 
 // API Upload
 router.post("/api/upload", controller.upload);
