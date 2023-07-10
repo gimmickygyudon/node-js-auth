@@ -28,12 +28,15 @@ export const reportBalanceDue_retrieve = async (req, res) => {
     sim_report_VOAAR_MODEL.findAll({
         where: condition,
         attributes: [
-            // [sequelize.fn('count', sequelize.col('balance_due')), 'count'],
-            // [sequelize.fn('sum', sequelize.col('balance_due')), 'total_balance_due'],
+            'invoice_code',
+            'due_date',
             'balance_due',
-            'umur_piutang'
+            'umur_piutang',
         ],
         distinct: true,
+        order: [
+            [ 'umur_piutang', 'DESC' ]
+        ],
     })
     .then(data => {
         if (!isEmptyObject(data)) {
@@ -48,7 +51,6 @@ export const reportBalanceDue_retrieve = async (req, res) => {
                     total_balance_due += Number(item.dataValues.balance_due)
                 }
 
-                console.log(total_balance)
                 count++;
             })
 
@@ -56,7 +58,8 @@ export const reportBalanceDue_retrieve = async (req, res) => {
                 {
                     'total_balance': total_balance,
                     'total_balance_due': total_balance_due,
-                    'count': count
+                    'count': count,
+                    'data': data
                 }
             ]);
         } else {
