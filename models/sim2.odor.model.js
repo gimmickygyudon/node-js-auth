@@ -1,5 +1,4 @@
 import db_sim2 from "../config/sim2.db.config.js";
-import { sim2_VOTSR_MODEL } from "../models/sim2.votsr.model.js";
 import { Sequelize } from "sequelize";
 const { DataTypes } = Sequelize;
 

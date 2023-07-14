@@ -34,12 +34,6 @@ export const reportPaymentDue_retrieve = async (req, res) => {
 
     sim_report_VOPRS_MODEL.findAll({
         where: condition,
-        attributes: [
-            'invoice_code',
-            'parent_code',
-            'payment_date',
-            'total_payment'
-        ],
         distinct: true,
     })
     .then(data => {

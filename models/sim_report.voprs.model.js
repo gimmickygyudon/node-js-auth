@@ -15,6 +15,9 @@ export const sim_report_VOPRS_MODEL = db_sim_report.define(
         payment_date: {
             type: DataTypes.DATE,
         },
+        payment_duration: {
+            type: DataTypes.INTEGER,
+        },
         total_payment: {
             type: DataTypes.DOUBLE,
         },
