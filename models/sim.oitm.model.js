@@ -2,7 +2,7 @@ import db_sim from "../config/sim.db.config.js";
 import { Sequelize } from "sequelize";
 const { DataTypes } = Sequelize;
 
-const sim_OITM_MODEL = db_sim.define(
+export const sim_OITM_MODEL = db_sim.define(
     "OITM",
     {
         id_oitm: {
@@ -26,9 +26,9 @@ const sim_OITM_MODEL = db_sim.define(
         }
     },
     {
+        tableName: "OITM",
         freezeTableName: true,
         timestamps: false,
+        schema: "sim"
     }
 );
-
-export default sim_OITM_MODEL;

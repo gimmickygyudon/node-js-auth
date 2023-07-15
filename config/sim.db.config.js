@@ -15,5 +15,6 @@ export const db_sim = new Sequelize("sim", "mysql_client", "1BMclient!", {
     },
 });
 
+db_sim.dialect.supports.schemas = true;
 
 export default db_sim;

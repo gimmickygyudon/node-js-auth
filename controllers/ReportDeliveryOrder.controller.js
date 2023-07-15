@@ -1,5 +1,5 @@
 import db_sim2 from "../config/sim2.db.config.js";
-import { sim2_VODOR_MODEL } from "../models/sim2.odor.model.js";
+import { sim2_VODOR_MODEL } from "../models/sim2.vodor.model.js";
 import { sim2_VOTSR_MODEL } from "../models/sim2.votsr.model.js";
 const Op = db_sim2.Sequelize.Op;
 const sequelize = db_sim2.Sequelize;

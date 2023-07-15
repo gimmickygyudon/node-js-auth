@@ -15,5 +15,4 @@ export const db_sim2 = new Sequelize("sim2", "mysql_client", "1BMclient!", {
     },
 });
 
-
 export default db_sim2;

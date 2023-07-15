@@ -8,14 +8,13 @@ import { SFB1_create, SFB1_find_id_ousr } from "../controllers/sfb1.controller.j
 import { SFB2_create, SFB2_find_id_ousr } from "../controllers/sfb2.controller.js";
 
 // Customer Controllers
-import { customer_create, customer_delete, customer_retrieve } from "../controllers/customer.controller.js";
+import { customer_create, customer_delete, customer_retrieve, customer_item_group } from "../controllers/customer.controller.js";
 import { reportDeliveryOrder_retrieve } from "../controllers/ReportDeliveryOrder.controller.js";
 import { reportBalanceDue_retrieve } from "../controllers/ReportBalanceDue.controller.js";
 import { reportPaymentDue_retrieve } from "../controllers/ReportPaymentDue.controller.js";
 
 // Item Controllers
-import { OITM_find } from "../controllers/sim.oitm.controller.js";
-import { sim_BRN1_find_id } from "../controllers/sim.brn1.controller.js";
+import { Item_name_retrieve, Item_retrieve, Item_description_retrieve } from "../controllers/Item.controller.js";
 
 // Address Controllers
 import { sim_OPRV_find } from "../controllers/sim.oprv.controller.js";
@@ -63,6 +62,7 @@ router.delete("/api/usr2", customer_delete);
 router.get("/api/sim2/do", reportDeliveryOrder_retrieve);
 router.get("/api/sim_report/arr", reportBalanceDue_retrieve);
 router.get("/api/sim_report/prs", reportPaymentDue_retrieve);
+router.get("/api/sim/customer/item", customer_item_group);
 
 // API Upload
 router.post("/api/upload", controller.upload);
@@ -70,8 +70,9 @@ router.get("/api/files", controller.getListFiles);
 router.get("/api/files/:name", controller.download);
 
 // API Item
-router.get("/api/sim/oitm/", OITM_find);
-router.get("/api/sim/brn1", sim_BRN1_find_id);
+router.get("/api/sim/item/description", Item_description_retrieve);
+router.get("/api/sim/item", Item_retrieve);
+router.get("/api/sim/item/name", Item_name_retrieve);
 
 // API Address
 router.get("/api/sim/oprv", sim_OPRV_find);
